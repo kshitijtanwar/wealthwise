@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { dashboardAPI, expenseAPI, budgetAPI, goalAPI } from "../services/api";
 import DashboardStats from "../components/DashboardStats";
@@ -20,13 +21,12 @@ const Dashboard = () => {
 
     const fetchDashboardData = async () => {
         try {
-            const [dashboardRes, expensesRes, budgetsRes] =
-                await Promise.all([
-                    dashboardAPI.getDashboard(),
-                    expenseAPI.getExpenses(),
-                    budgetAPI.getBudgets(),
-                    goalAPI.getGoals(),
-                ]);
+            const [dashboardRes, expensesRes, budgetsRes] = await Promise.all([
+                dashboardAPI.getDashboard(),
+                expenseAPI.getExpenses(),
+                budgetAPI.getBudgets(),
+                goalAPI.getGoals(),
+            ]);
 
             setDashboardData(dashboardRes.data);
             setExpenses(expensesRes.data.expenses || []);
@@ -66,15 +66,15 @@ const Dashboard = () => {
                         </div>
                     </div>
                     <nav className="nav flex-column">
-                        <a
+                        <Link
                             className="nav-link text-white active"
-                            href="#dashboard"
+                            to="/dashboard"
                         >
                             <i className="bi bi-house me-2"></i>Dashboard
-                        </a>
-                        <a className="nav-link text-white-50" href="#expenses">
+                        </Link>
+                        <Link className="nav-link text-white-50" to="/expenses">
                             <i className="bi bi-receipt me-2"></i>Expenses
-                        </a>
+                        </Link>
                         <a className="nav-link text-white-50" href="#budgets">
                             <i className="bi bi-pie-chart me-2"></i>Budgets
                         </a>

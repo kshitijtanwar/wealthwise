@@ -10,6 +10,7 @@ import { useAuth } from "./hooks/useAuth";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Dashboard from "./pages/Dashboard";
+import ExpensesPage from "./pages/ExpensesPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -66,6 +67,14 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <Dashboard />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/expenses"
+                            element={
+                                <ProtectedRoute>
+                                    <ExpensesPage />
                                 </ProtectedRoute>
                             }
                         />
