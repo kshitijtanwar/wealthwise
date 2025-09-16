@@ -18,3 +18,14 @@ exports.setBudget = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getBudgets = async (req, res, next) => {
+    try {
+        const budgets = await Budget.find({ userId: req.user._id }).sort({
+            startDate: -1,
+        });
+        res.json({ budgets });
+    } catch (error) {
+        next(error);
+    }
+};
