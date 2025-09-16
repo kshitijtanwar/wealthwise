@@ -15,7 +15,12 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
 // Middleware
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,7 +37,7 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 // Error Handler
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

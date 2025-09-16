@@ -1,4 +1,3 @@
-
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 const bcrypt = require("bcryptjs");
@@ -60,4 +59,16 @@ exports.logout = (req, res) => {
         sameSite: "strict",
     });
     res.status(200).json({ message: "Logged out successfully" });
+};
+
+exports.getMe = async (req, res, next) => {
+    try {
+        res.json({
+            _id: req.user._id,
+            name: req.user.name,
+            email: req.user.email,
+        });
+    } catch (error) {
+        next(error);
+    }
 };
