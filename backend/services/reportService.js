@@ -1,8 +1,14 @@
+const Expense = require("../models/Expense");
+const Budget = require("../models/Budget");
+const Goal = require("../models/Goal");
+
 exports.getDashboardStats = async (userId) => {
-    // Placeholder for dashboard stats logic
+    const totalExpenses = await Expense.countDocuments({ userId });
+    const totalBudgets = await Budget.countDocuments({ userId });
+    const totalGoals = await Goal.countDocuments({ userId });
     return {
-        totalExpenses: 0,
-        totalBudgets: 0,
-        totalGoals: 0,
+        totalExpenses,
+        totalBudgets,
+        totalGoals,
     };
 };

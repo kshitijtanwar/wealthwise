@@ -2,11 +2,13 @@ const Goal = require("../models/Goal");
 
 exports.setGoal = async (req, res, next) => {
     try {
-        const { goal, targetAmount } = req.body;
+        const { title, targetAmount, targetDate, startAmount } = req.body;
         const newGoal = await Goal.create({
             userId: req.user._id,
-            goal,
+            title,
             targetAmount,
+            targetDate,
+            startAmount,
         });
         res.status(201).json({ message: "Goal set successfully", newGoal });
     } catch (error) {
