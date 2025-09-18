@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { useAuth } from "./hooks/useAuth";
+import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Dashboard from "./pages/Dashboard";
@@ -63,25 +64,20 @@ function App() {
                             }
                         />
                         <Route
-                            path="/dashboard"
-                            element={
-                                <ProtectedRoute>
-                                    <Dashboard />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
-                            path="/expenses"
-                            element={
-                                <ProtectedRoute>
-                                    <ExpensesPage />
-                                </ProtectedRoute>
-                            }
-                        />
-                        <Route
                             path="/"
-                            element={<Navigate to="/dashboard" />}
-                        />
+                            element={
+                                <ProtectedRoute>
+                                    <Layout />
+                                </ProtectedRoute>
+                            }
+                        >
+                            <Route path="dashboard" element={<Dashboard />} />
+                            <Route path="expenses" element={<ExpensesPage />} />
+                            <Route
+                                index
+                                element={<Navigate to="/dashboard" />}
+                            />
+                        </Route>
                     </Routes>
                 </div>
             </Router>
