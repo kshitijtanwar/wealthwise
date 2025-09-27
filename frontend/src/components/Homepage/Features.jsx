@@ -1,12 +1,12 @@
-import mockImg from "../../assets/images/bulbasaur.avif"
+// import mockImg from "../../assets/images/bulbasaur.avif"
 
-import easy from "../../assets/images/Easytouse.png"
+// import easy from "../../assets/images/Easytouse.png"
 
-import ui from "../../assets/images/ui.jpg";
+// import ui from "../../assets/images/ui.jpg";
 
 import FeatureCard from "../Features/FeatureCard"
 
-import security from "../../assets/images/security.webp"
+// import security from "../../assets/images/security.webp"
 
 
  
@@ -21,7 +21,7 @@ const MOCK_FEATURES = [
 
         desc: "Designed for simplicity, our platform offers an intuitive experience that allows users to manage finances effortlessly and with confidence.",
 
-        img: easy
+        // img: easy
 
     },
 
@@ -33,7 +33,7 @@ const MOCK_FEATURES = [
 
         desc: "Enjoy a modern and visually appealing interface that makes navigating through complex financial data seamless and engaging.",
 
-        img: ui
+        // img: ui
 
     },
 
@@ -45,7 +45,7 @@ const MOCK_FEATURES = [
 
         desc: "Your privacy matters. We provide robust,industry-standard data protection to ensure all your financial information is gaurded and confidential.",
 
-        img: security
+        // img: security
 
     },
 

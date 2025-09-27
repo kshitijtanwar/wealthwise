@@ -1,6 +1,6 @@
 import HomepageNav from "../components/Homepage/HomepageNav";
 
-import About from "../components/Homepage/About"
+import About from "../components/Homepage/About";
 
 import Features from "../components/Homepage/Features";
 
@@ -10,34 +10,24 @@ import Testimonials from "../components/Homepage/Testimonials";
 
 import Footer from "../components/Homepage/Footer";
 
-
- 
-
 const Homepage = () => {
+    return (
+        <section>
+            <HomepageNav />
 
-    return <section>
+            <div className="container-fluid">
+                <About />
 
-        <HomepageNav />
+                <Features />
 
-        <div className="container-fluid">
+                <Services />
 
-            <About />
+                <Testimonials />
+            </div>
 
-            <Features />
-
-            <Services />
-
-            <Testimonials />
-
-        </div>
-
-        <Footer />
-
-    </section>
-
-}
-
-
- 
+            <Footer />
+        </section>
+    );
+};
 
 export default Homepage;

@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 const jwt = require("jsonwebtoken")
 
-const { sendResetEmail } = require("../utils/sendMail")
+const { sendResetEmail } = require("../utils/sendEmail")
 
 const generateToken = require("../utils/generateToken");
 
