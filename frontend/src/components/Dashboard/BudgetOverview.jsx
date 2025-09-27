@@ -1,9 +1,20 @@
-import React from "react";
-
 const BudgetOverview = ({ budgets, expenses }) => {
+    const now = new Date();
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+
     const calculateBudgetUsage = (budget) => {
+
         const categoryExpenses = expenses
-            .filter((expense) => expense.category === budget.category)
+            .filter((expense) => {
+                const expenseDate = new Date(expense.date);
+                return (
+                    expense.category === budget.category &&
+                    expenseDate.getMonth() === currentMonth &&
+                    expenseDate.getFullYear() === currentYear
+                );
+            })
             .reduce((total, expense) => total + expense.amount, 0);
 
         const percentage = (categoryExpenses / budget.amount) * 100;
@@ -23,7 +34,7 @@ const BudgetOverview = ({ budgets, expenses }) => {
     return (
         <div className="card border-0 shadow-sm h-100">
             <div className="card-header bg-white">
-                <h5 className="card-title mb-0">Budget Overview</h5>
+                <h5 className="card-title mb-0">{months[currentMonth]} Budget Overview</h5>
             </div>
             <div className="card-body">
                 {budgets.length > 0 ? (
@@ -33,18 +44,12 @@ const BudgetOverview = ({ budgets, expenses }) => {
                             return (
                                 <div key={budget._id} className="mb-4">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h6 className="mb-0">
-                                            {budget.category}
-                                        </h6>
+                                        <h6 className="mb-0">{budget.category}</h6>
                                         <small className="text-muted">
-                                            ${usage.spent.toFixed(2)} / $
-                                            {budget.amount.toFixed(2)}
+                                            ${usage.spent.toFixed(2)} / ${budget.amount.toFixed(2)}
                                         </small>
                                     </div>
-                                    <div
-                                        className="progress mb-2"
-                                        style={{ height: "8px" }}
-                                    >
+                                    <div className="progress mb-2" style={{ height: "8px" }}>
                                         <div
                                             className={`progress-bar ${getProgressBarClass(
                                                 usage.percentage
@@ -59,8 +64,7 @@ const BudgetOverview = ({ budgets, expenses }) => {
                                         ></div>
                                     </div>
                                     <small className="text-muted">
-                                        {usage.percentage.toFixed(1)}% used • $
-                                        {usage.remaining.toFixed(2)} remaining
+                                        {usage.percentage.toFixed(1)}% used • ${usage.remaining.toFixed(2)} remaining
                                     </small>
                                 </div>
                             );

@@ -1,41 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
 const ExpenseChart = ({ expenses }) => {
-    const [chartDimensions, setChartDimensions] = useState({
-        width: null,
-        height: null,
-        useCustomDimensions: false,
-    });
-
-    // Update chart dimensions based on screen size
-    useEffect(() => {
-        const updateDimensions = () => {
-            const screenWidth = window.innerWidth;
-
-            if (screenWidth < 768) {
-                // Small screens - no explicit dimensions (naturally responsive)
-                setChartDimensions({
-                    width: null,
-                    height: null,
-                    useCustomDimensions: false,
-                });
-            } else {
-                // Medium and large screens - fixed dimensions
-                setChartDimensions({
-                    width: 400,
-                    height: 300,
-                    useCustomDimensions: true,
-                });
-            }
-        };
-
-        updateDimensions();
-        window.addEventListener("resize", updateDimensions);
-
-        return () => window.removeEventListener("resize", updateDimensions);
-    }, []);
-
     // Process expenses data for chart
     const processExpenseData = () => {
         const categoryTotals = {};
@@ -81,10 +47,8 @@ const ExpenseChart = ({ expenses }) => {
                                 },
                             },
                         ]}
-                        {...(chartDimensions.useCustomDimensions && {
-                            height: chartDimensions.height,
-                            width: chartDimensions.width,
-                        })}
+                        height={200}
+                        width={200}
                     />
                 ) : (
                     <div className="text-center text-muted">
