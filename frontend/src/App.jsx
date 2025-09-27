@@ -1,88 +1,129 @@
-import React from "react";
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
-} from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import { useAuth } from "./hooks/useAuth";
-import Layout from "./components/Layout";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import Dashboard from "./pages/Dashboard";
-import ExpensesPage from "./pages/ExpensesPage";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.css"
 
-// Protected Route component
-const ProtectedRoute = ({ children }) => {
-    const { user, loading } = useAuth();
+import "bootstrap/dist/js/bootstrap.bundle.js"
 
-    if (loading) {
-        return (
-            <div className="d-flex justify-content-center mt-5">Loading...</div>
-        );
-    }
+import "./styles/custom.css"
 
-    return user ? children : <Navigate to="/login" />;
-};
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 
-// Public Route component (redirect to dashboard if logged in)
-const PublicRoute = ({ children }) => {
-    const { user, loading } = useAuth();
+import Homepage from "./pages/Homepage"
 
-    if (loading) {
-        return (
-            <div className="d-flex justify-content-center mt-5">Loading...</div>
-        );
-    }
+import LoginPage from "./pages/LoginPage"
 
-    return user ? <Navigate to="/dashboard" /> : children;
-};
+import SignupPage from "./pages/SignupPage"
 
-function App() {
-    return (
-        <AuthProvider>
-            <Router>
-                <div className="App">
-                    <Routes>
-                        <Route
-                            path="/login"
-                            element={
-                                <PublicRoute>
-                                    <LoginPage />
-                                </PublicRoute>
-                            }
-                        />
-                        <Route
-                            path="/signup"
-                            element={
-                                <PublicRoute>
-                                    <SignupPage />
-                                </PublicRoute>
-                            }
-                        />
-                        <Route
-                            path="/"
-                            element={
-                                <ProtectedRoute>
-                                    <Layout />
-                                </ProtectedRoute>
-                            }
-                        >
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="expenses" element={<ExpensesPage />} />
-                            <Route
-                                index
-                                element={<Navigate to="/dashboard" />}
-                            />
-                        </Route>
-                    </Routes>
-                </div>
-            </Router>
-        </AuthProvider>
-    );
+import Dashboard from "./pages/Dashboard"
+
+import Layout from "./components/Layout/Layout"
+
+import Budgets from "./pages/Budgets"
+
+import Expenses from "./pages/Expenses"
+
+import Goals from "./pages/Goals"
+
+import { Toaster } from "react-hot-toast"
+
+import { useAuth } from "../hooks/useAuth"
+
+import { AuthProvider } from "../contexts/AuthContext"
+
+import Settings from "./pages/Settings"
+
+
+
+ 
+
+const ProtectedRoutes = ({ children }) => {
+
+  const { user, loading } = useAuth();
+
+
+ 
+
+  if (loading) {
+
+    return <div className="d-flex align-items-center justify-content-center">Loading...</div>
+
+  }
+
+
+ 
+
+  return user ? children : <Navigate to={"/login"} />
+
 }
 
-export default App;
+const PublicRoutes = ({ children }) => {
+
+  const { user, loading } = useAuth();
+
+
+ 
+
+  if (loading) {
+
+    return <div className="d-flex align-items-center justify-content-center">Loading...</div>
+
+  }
+
+
+ 
+
+  return user ? <Navigate to={"/dashboard"} /> : children;
+
+}
+
+
+ 
+
+function App() {
+
+  return (
+
+    <section>
+
+      <AuthProvider>
+
+        <Router>
+
+          <Routes>
+
+            <Route path="/" element={<Homepage />} />
+
+            <Route path="/login" element={<PublicRoutes><LoginPage /></PublicRoutes>} />
+
+            <Route path="/register" element={<PublicRoutes><SignupPage /></PublicRoutes>} />
+
+            <Route path="/dashboard" element={<ProtectedRoutes><Layout /></ProtectedRoutes>}>
+
+              <Route path="" element={<Dashboard />} />
+
+              <Route path="budgets" element={<Budgets />} />
+
+              <Route path="expenses" element={<Expenses />} />
+
+              <Route path="goals" element={<Goals />} />
+
+              <Route path="settings" element={<Settings />} />
+
+            </Route>
+
+          </Routes>
+
+        </Router>
+
+      </AuthProvider>
+
+      <Toaster />
+
+    </section>
+
+  )
+
+}
+
+
+ 
+
+export default App
