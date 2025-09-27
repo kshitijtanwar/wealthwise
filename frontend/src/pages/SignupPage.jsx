@@ -1,172 +1,145 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import auth from "../assets/images/auth.jpg"
+
+import { useNavigate } from "react-router-dom"
+
+import { useForm } from "react-hook-form"
+
+import { useAuth } from "../../hooks/useAuth"
+
+
+ 
 
 const SignupPage = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
+
     const { signup } = useAuth();
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError("");
 
-        if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match");
-            setLoading(false);
-            return;
+ 
+
+    const handleOnSubmit = async (data) => {
+
+        try {
+
+            await signup(data);
+
+            reset();
+
+        } catch (error) {
+
+            console.log(error);
+
         }
 
-        const result = await signup({
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-        });
+    }
 
-        if (!result.success) {
-            setError(result.error);
-        }
 
-        setLoading(false);
-    };
 
-    return (
-        <div className="container-fluid vh-100">
-            <div className="row h-100">
-                <div className="col-md-6 d-flex align-items-center justify-content-center bg-success">
-                    <div className="text-white text-center">
-                        <h1 className="display-4 fw-bold">WealthWise</h1>
-                        <p className="lead">
-                            Start your financial journey today
-                        </p>
-                    </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-center justify-content-center">
-                    <div className="w-100" style={{ maxWidth: "400px" }}>
-                        <div className="card border-0 shadow">
-                            <div className="card-body p-5">
-                                <h2 className="card-title text-center mb-4">
-                                    Create Account
-                                </h2>
-                                <form onSubmit={handleSubmit}>
-                                    {error && (
-                                        <div
-                                            className="alert alert-danger"
-                                            role="alert"
-                                        >
-                                            {error}
-                                        </div>
-                                    )}
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="name"
-                                            className="form-label"
-                                        >
-                                            Full Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            id="name"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="email"
-                                            className="form-label"
-                                        >
-                                            Email
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            id="email"
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="password"
-                                            className="form-label"
-                                        >
-                                            Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            className="form-control"
-                                            id="password"
-                                            name="password"
-                                            value={formData.password}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="confirmPassword"
-                                            className="form-label"
-                                        >
-                                            Confirm Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            className="form-control"
-                                            id="confirmPassword"
-                                            name="confirmPassword"
-                                            value={formData.confirmPassword}
-                                            onChange={handleChange}
-                                            required
-                                        />
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        className="btn btn-success w-100 mb-3"
-                                        disabled={loading}
-                                    >
-                                        {loading
-                                            ? "Creating account..."
-                                            : "Sign Up"}
-                                    </button>
-                                </form>
-                                <div className="text-center">
-                                    <p className="mb-0">
-                                        Already have an account?{" "}
-                                        <Link
-                                            to="/login"
-                                            className="text-success text-decoration-none"
-                                        >
-                                            Sign in
-                                        </Link>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+ 
+
+    return <section className="min-vh-100 container-fluid p-0">
+
+        <div className="row h-100 g-0">
+
+            <div className="col-md-6 d-none d-md-block p-0">
+
+                <img src={auth} alt="login-image" className="w-100 vh-100 object-fit-cover d-block" />
+
             </div>
-        </div>
-    );
-};
 
-export default SignupPage;
+            <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
+
+                <div className="w-75 w-md-50 mt-5 mt-md-0">
+
+                    <h1 role="button" onClick={() => {
+
+                        navigate("/")
+
+                    }} className="display-6 text-center">Wealthwise</h1>
+
+                    <h2 className="my-4 fs-2 display-6">Signup</h2>
+
+                    <form onSubmit={handleSubmit(handleOnSubmit)}>
+
+                        <div className="mb-3 form-group">
+
+                            <label htmlFor="email" className="form-label">Email</label>
+
+                            <input type="email" className="form-control" placeholder="example@email.com" {...register("email", {
+
+                                required: "Email is required",
+
+                                pattern: {
+
+                                    value: /^[a-z0-9._]{1,}@[a-z]+\.com$/,
+
+                                    message: "Invalid Email Address"
+
+                                }
+
+                            })} />
+
+                            {errors.email && <p className="text-end text-danger fs-6">{errors.email.message}</p>}
+
+                        </div>
+
+                        <div className="mb-3 form-group">
+
+                            <label htmlFor="password" className="form-label">Password</label>
+
+                            <input type="password" className="form-control" placeholder="*******"  {
+
+                                ...register("password", {
+
+                                    required: "Password is required",
+
+                                    minLength: {
+
+                                        value: 6,
+
+                                        message: "Password must be atleast 6 characters."
+
+                                    }
+
+                                })
+
+                            } />
+
+                            {errors.password && <p className="text-end text-danger fs-6">{errors.password.message}</p>}
+
+                        </div>
+
+
+ 
+
+                        <div className="w-100">
+
+                            <button disabled={isSubmitting} className="btn btn-primary w-100">Register</button>
+
+                        </div>
+
+                        <p onClick={() => navigate("/login")} className="text-end mt-3 text-muted p-0" style={{
+
+                            fontSize: "0.875rem"
+
+                        }}>Already have an account?</p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+}
+
+
+ 
+
+export default SignupPage
