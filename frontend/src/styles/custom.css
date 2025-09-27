@@ -1,6 +1,5 @@
 :root {
     --bs-primary: #6610f2;
-
     --bs-primary-rgb: 102, 16, 242;
 }
 
@@ -14,30 +13,85 @@
 
 .btn-primary {
     --bs-btn-color: #fff;
-
     --bs-btn-bg: #6610f2;
-
     --bs-btn-border-color: #6610f2;
-
     --bs-btn-hover-color: #fff;
-
     --bs-btn-hover-bg: #5211bb;
-
     --bs-btn-hover-border-color: #7229e7;
-
     --bs-btn-focus-shadow-rgb: 49, 132, 253;
-
     --bs-btn-active-color: #fff;
-
     --bs-btn-active-bg: #6610f2;
-
     --bs-btn-active-border-color: #6610f2;
-
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-
     --bs-btn-disabled-color: #fff;
-
     --bs-btn-disabled-bg: #6610f2;
-
     --bs-btn-disabled-border-color: #6610f2;
+}
+
+/* Modern Hover Effects */
+.hover-lift:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.hover-opacity-100:hover {
+    opacity: 1 !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Navbar enhancements */
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--bs-primary) !important;
+    transition: color 0.3s ease;
+}
+
+/* Button hover effects */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Icon animations */
+.bi:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Section spacing */
+section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Testimonial star rating */
+.text-warning .bi-star-fill {
+    color: #ffc107 !important;
 }

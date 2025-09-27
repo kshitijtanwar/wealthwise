@@ -1,11 +1,24 @@
-const FeatureCard = ({ img, title, desc }) => {
-    return <div className="card" >
-        <img src={img} className="card-img-top object-fit-contain" alt={title} width={200} height={200}/>
-        <div className="card-body">
-            <h5 className="card-title text-center">{title}</h5>
-            <p className="card-text text-center">{desc}</p>
+const FeatureCard = ({ title, desc, icon }) => {
+    return (
+        <div
+            className="card h-100 shadow-sm border-0 hover-lift"
+            style={{ transition: "transform 0.3s ease" }}
+        >
+            <div className="card-body text-center p-4">
+                <div
+                    className="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                    style={{ width: "80px", height: "80px" }}
+                >
+                    <i
+                        className={`bi ${icon} text-primary`}
+                        style={{ fontSize: "2.5rem" }}
+                    ></i>
+                </div>
+                <h5 className="card-title fw-bold mb-3">{title}</h5>
+                <p className="card-text text-muted">{desc}</p>
+            </div>
         </div>
-    </div>
-}
+    );
+};
 
-export default FeatureCard
+export default FeatureCard;

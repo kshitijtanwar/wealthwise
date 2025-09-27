@@ -12,21 +12,16 @@ import Footer from "../components/Homepage/Footer";
 
 const Homepage = () => {
     return (
-        <section>
+        <div>
             <HomepageNav />
-
-            <div className="container-fluid">
+            <main>
                 <About />
-
                 <Features />
-
                 <Services />
-
                 <Testimonials />
-            </div>
-
+            </main>
             <Footer />
-        </section>
+        </div>
     );
 };
 
