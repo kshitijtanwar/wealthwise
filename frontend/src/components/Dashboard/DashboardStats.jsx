@@ -25,7 +25,7 @@ const DashboardStats = ({ stats }) => {
         },
         {
             title: "Monthly Savings",
-            value: stats?.monthlySavings || "$1,250",
+            value: stats?.monthlySavings || "₹1,250",
             icon: "bi-piggy-bank",
             color: "info",
             bgGradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",

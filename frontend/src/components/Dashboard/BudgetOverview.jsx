@@ -94,10 +94,10 @@ const BudgetOverview = ({ budgets, expenses }) => {
                                         </div>
                                         <div className="text-end">
                                             <div className="fw-bold">
-                                                ${usage.spent.toFixed(2)}
+                                                ₹{usage.spent.toFixed(2)}
                                             </div>
                                             <small className="text-muted">
-                                                of ${budget.amount.toFixed(2)}
+                                                of ₹{budget.amount.toFixed(2)}
                                             </small>
                                         </div>
                                     </div>
@@ -138,7 +138,7 @@ const BudgetOverview = ({ budgets, expenses }) => {
                                                         : "bi-exclamation-triangle"
                                                 } me-1`}
                                             ></i>
-                                            $
+                                            ₹
                                             {Math.abs(usage.remaining).toFixed(
                                                 2
                                             )}{" "}

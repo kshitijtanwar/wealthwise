@@ -98,7 +98,7 @@ const ExpenseChart = ({ expenses }) => {
                                                 {item.label}
                                             </small>
                                             <div className="fw-bold">
-                                                ${item.value.toFixed(2)}
+                                                ₹{item.value.toFixed(2)}
                                             </div>
                                         </div>
                                     </div>

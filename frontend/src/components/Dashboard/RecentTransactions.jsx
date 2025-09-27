@@ -305,7 +305,7 @@ const RecentTransactions = ({ expenses }) => {
                                         </div>
                                         <div className="text-end">
                                             <div className="fw-bold fs-5 text-danger mb-1">
-                                                -${expense.amount.toFixed(2)}
+                                                -₹{expense.amount.toFixed(2)}
                                             </div>
                                             <small className="text-muted d-flex align-items-center">
                                                 <i className="bi bi-calendar3 me-1"></i>

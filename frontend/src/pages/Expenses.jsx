@@ -141,12 +141,14 @@ const Expenses = () => {
     }
 
     return (
-        <Container className="py-4">
+        <Container className="py-4 container-fluid">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <div className="">
-                    <h1 className="display-5 fw-bold text-dark mb-2">
+                    <h1 className="display-5 fw-bold mb-2 text-primary">
+                        <i className="bi bi-speedometer2 "></i>
                         Expenses
                     </h1>
+                    <h1 className="display-5 fw-bold text-dark mb-2 "></h1>
                     <p className="text-muted fs-6 mb-0">
                         Track and analyze your spending patterns
                     </p>
@@ -227,7 +229,7 @@ const Expenses = () => {
                                             className="fw-bold text-primary"
                                             style={{ fontSize: "1.5rem" }}
                                         >
-                                            $
+                                            ₹
                                         </span>
                                     </div>
                                     <h3 className="text-primary fw-bold mb-2">
@@ -344,7 +346,7 @@ const Expenses = () => {
                                                             (item) =>
                                                                 item.amount
                                                         ),
-                                                        label: "Monthly Spending ($)",
+                                                        label: "Monthly Spending (₹)",
                                                         color: "#198754",
                                                         curve: "linear",
                                                     },
@@ -422,7 +424,7 @@ const Expenses = () => {
                                                             (item) =>
                                                                 item.amount
                                                         ),
-                                                        label: "Amount ($)",
+                                                        label: "Amount (₹)",
                                                         color: "#6610f2",
                                                     },
                                                 ]}
@@ -562,7 +564,7 @@ const Expenses = () => {
                                                                     </td>
                                                                     <td className="py-3 text-end">
                                                                         <span className="fw-bold text-danger fs-6">
-                                                                            $
+                                                                            ₹
                                                                             {expense.amount.toFixed(
                                                                                 2
                                                                             )}

@@ -49,6 +49,7 @@ const Goal = () => {
     const [gold, setGold] = useState(0);
     const [goals, setGoals] = useState([]);
     const [editingGoal, setEditingGoal] = useState(null);
+    const [showValidationErrors, setShowValidationErrors] = useState(false);
 
     // Check if salary is filled
     const hasSalary = user && user.salary && user.salary > 0;
@@ -152,9 +153,12 @@ const Goal = () => {
         setFd(0);
         setGold(0);
         setEditingGoal(null);
+        setShowValidationErrors(false);
     };
 
     const handleCreateGoal = async () => {
+        setShowValidationErrors(true);
+
         if (!goalName.trim() || !targetAmount || !duration) {
             toast.error("Please fill in all goal details");
             return;
@@ -207,6 +211,7 @@ const Goal = () => {
         setFd(goal.allocation.fd);
         setGold(goal.allocation.gold);
         setEditingGoal(goal);
+        setShowValidationErrors(false);
         setActiveTab("create");
         toast.info(`Editing goal: ${goal.name}`);
     };
@@ -456,7 +461,11 @@ const Goal = () => {
                     <Button
                         onClick={() => {
                             setActiveTab("create");
-                            if (!editingGoal) resetForm();
+                            if (!editingGoal) {
+                                resetForm();
+                            } else {
+                                setShowValidationErrors(false);
+                            }
                         }}
                         sx={{
                             flex: 1,
@@ -969,9 +978,11 @@ const Goal = () => {
                                         setGoalName(e.target.value)
                                     }
                                     variant="outlined"
-                                    error={!goalName.trim() && goalName !== ""}
+                                    error={
+                                        showValidationErrors && !goalName.trim()
+                                    }
                                     helperText={
-                                        !goalName.trim() && goalName !== ""
+                                        showValidationErrors && !goalName.trim()
                                             ? "Goal name is required"
                                             : ""
                                     }
@@ -988,9 +999,11 @@ const Goal = () => {
                                         setTargetAmount(e.target.value)
                                     }
                                     variant="outlined"
-                                    error={!targetAmount}
+                                    error={
+                                        showValidationErrors && !targetAmount
+                                    }
                                     helperText={
-                                        !targetAmount
+                                        showValidationErrors && !targetAmount
                                             ? "Target amount is required"
                                             : ""
                                     }
@@ -1019,9 +1032,11 @@ const Goal = () => {
                                         setDuration(e.target.value)
                                     }
                                     variant="outlined"
-                                    error={!duration}
+                                    error={showValidationErrors && !duration}
                                     helperText={
-                                        !duration ? "Duration is required" : ""
+                                        showValidationErrors && !duration
+                                            ? "Duration is required"
+                                            : ""
                                     }
                                 />
                             </Grid>

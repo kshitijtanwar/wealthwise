@@ -176,7 +176,7 @@ const Dashboard = () => {
 
                 pdf.setTextColor(33, 37, 41);
                 pdf.text(category, margin + 2, yPosition + 2);
-                pdf.text(`$${amount.toFixed(2)}`, margin + 80, yPosition + 2);
+                pdf.text(`₹${amount.toFixed(2)}`, margin + 80, yPosition + 2);
                 pdf.text(`${percentage}%`, margin + 120, yPosition + 2);
                 yPosition += 6;
             });
@@ -252,7 +252,7 @@ const Dashboard = () => {
 
                     pdf.setTextColor(220, 53, 69); // Red for expenses
                     pdf.text(
-                        `-$${expense.amount.toFixed(2)}`,
+                        `-₹${expense.amount.toFixed(2)}`,
                         margin + 120,
                         yPosition + 2
                     );
@@ -323,7 +323,7 @@ const Dashboard = () => {
                     <div className="d-flex align-items-center justify-content-between flex-wrap">
                         <div>
                             <h1 className="display-5 fw-bold mb-2 text-primary">
-                                <i className="bi bi-speedometer2 me-3"></i>
+                                <i className="bi bi-speedometer2"></i>
                                 Dashboard
                             </h1>
                             <p className="lead text-muted mb-0">

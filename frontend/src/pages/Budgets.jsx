@@ -220,7 +220,7 @@ const Budgets = () => {
                                             </strong>
                                             <div className="text-end">
                                                 <div className="fw-semibold">
-                                                    ${budget.spent.toFixed(2)} /
+                                                    ₹{budget.spent.toFixed(2)} /
                                                     ${budget.amount.toFixed(2)}
                                                 </div>
                                             </div>
