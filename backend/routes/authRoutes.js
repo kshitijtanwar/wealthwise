@@ -1,20 +1,29 @@
-const express = require("express");
+const express = require('express');
+
+const { signup, login, logout, getMe, forgotPassword, resetPassword } = require('../controllers/authController');
+
+const { protect } = require("../middleware/authMiddleware")
+
 const router = express.Router();
-const {
-    signup,
-    login,
-    logout,
-    getMe,
-    forgotPassword,
-    resetPassword,
-} = require("../controllers/authController");
-const { protect } = require("../middleware/authMiddleware");
+
+
+
+ 
 
 router.post("/signup", signup);
+
 router.post("/login", login);
+
 router.post("/logout", logout);
+
 router.get("/me", protect, getMe);
-router.post("/forgot-password", forgotPassword);
-router.post("/reset-password", resetPassword);
+
+router.post("/forgot-password", forgotPassword)
+
+router.post("/reset-password", resetPassword)
+
+
+
+ 
 
 module.exports = router;
