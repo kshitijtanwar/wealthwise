@@ -38,6 +38,10 @@
     opacity: 1 !important;
 }
 
+.hover-bg-light:hover {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
@@ -46,6 +50,11 @@ html {
 /* Custom gradient backgrounds */
 .bg-gradient {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Dashboard specific gradients */
+.dashboard-gradient {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e9ecef 100%) !important;
 }
 
 /* Animation for cards */
@@ -94,4 +103,59 @@ section {
 /* Testimonial star rating */
 .text-warning .bi-star-fill {
     color: #ffc107 !important;
+}
+
+/* Dashboard Stats Cards */
+.stats-card {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.7) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Progress bar enhancements */
+.progress {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+/* Custom shadows */
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hover-lift {
+        transform: none !important;
+    }
+
+    .hover-lift:hover {
+        transform: none !important;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    }
+}
+
+/* Loading spinner */
+.spinner-border-lg {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Badge styles */
+.badge {
+    font-size: 0.75em;
+    font-weight: 500;
+}
+
+/* Custom border radius */
+.rounded-3 {
+    border-radius: 1rem !important;
 }
