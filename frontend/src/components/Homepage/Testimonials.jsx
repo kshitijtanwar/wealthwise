@@ -5,7 +5,7 @@ const mock_testimonials = [
         name: "John Doe",
         role: "Web Developer",
         feedback:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam voluptate est a beatae veniam adipisci aut expedita iste nesciunt atque.",
+            "WealthWise showed me exactly where my money was going. In just two months I paid off a lingering credit card bill and finally started contributing to savings every payday.",
         image: "https://via.placeholder.com/80",
     },
     {
@@ -13,7 +13,7 @@ const mock_testimonials = [
         name: "Jane Doe",
         role: "UI/UX Designer",
         feedback:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam voluptate est a beatae veniam adipisci aut expedita iste nesciunt atque.",
+            "The budget breakdown and clean dashboard make planning effortless. I set up categories once and now I stay under budget without thinking about it.",
         image: "https://via.placeholder.com/80",
     },
     {
@@ -21,7 +21,7 @@ const mock_testimonials = [
         name: "Micheal Lee",
         role: "Web Developer",
         feedback:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam voluptate est a beatae veniam adipisci aut expedita iste nesciunt atque.",
+            "Goals keep me motivated. Watching my emergency fund progress climb each week helped me reach 3 months of expenses ahead of schedule.",
         image: "https://via.placeholder.com/80",
     },
 ];
