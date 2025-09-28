@@ -20,6 +20,7 @@ export const authAPI = {
     logout: () => api.post("/auth/logout"),
 
     getMe: () => api.get("/auth/me"),
+    forgotPassword: (email) => api.post("/auth/forgot-password", { email }),
 };
 
 export const expenseAPI = {

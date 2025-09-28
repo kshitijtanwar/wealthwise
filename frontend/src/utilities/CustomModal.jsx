@@ -6,6 +6,8 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 import { useSpring } from "@react-spring/web";
 import { useForm } from "react-hook-form";
+import { authAPI } from "../../services/api";
+import { toast } from "react-hot-toast";
 
 const Fade = React.forwardRef(function Fade(props, ref) {
     const { children, in: open, onClick, onEnter, onExited, ...other } = props;
@@ -25,9 +27,9 @@ const Fade = React.forwardRef(function Fade(props, ref) {
     });
 
     return (
-        <animated.div ref={ref} style={style} {...other}>
+        <div ref={ref} style={style} {...other}>
             {React.cloneElement(children, { onClick })}
-        </animated.div>
+        </div>
     );
 });
 
@@ -59,8 +61,15 @@ export default function CustomModal({ open, handleClose }) {
         formState: { errors, isSubmitting },
     } = useForm();
 
-    const handleResetPassword = (data) => {
-        console.log(data);
+    const handleResetPassword = async (data) => {
+        try {
+            await authAPI.forgotPassword(data.email);
+            toast.success("Reset link sent to your email");
+            handleClose();
+        } catch (error) {
+            console.log(error);
+            toast.error("Failed to send reset link");
+        }
     };
     return (
         <Modal
@@ -107,7 +116,9 @@ export default function CustomModal({ open, handleClose }) {
                                 type="submit"
                                 className="btn btn-primary w-100 mt-3"
                             >
-                                Send Reset Link
+                                {isSubmitting
+                                    ? "Sending..."
+                                    : "Send Reset Link"}
                             </button>
                         </form>
                     </Box>
