@@ -4,13 +4,13 @@ require("dotenv").config();
 
 const MONGO_URI = process.env.MONGO_URI;
 
-const userId = "68c99575c246ee740aa25048";
+const userId = "68d8fc144cd6a055c8d040cb";
 const accountNumber = "1234567890";
 
 const transactions = [
     {
         amount: 100.0,
-        date: new Date("2024-09-01"),
+        date: new Date("2025-09-01"),
         description: "Uber Ride",
         category: "Transportation",
         merchant: "Uber",
@@ -18,7 +18,7 @@ const transactions = [
     },
     {
         amount: 50.0,
-        date: new Date("2024-09-02"),
+        date: new Date("2025-09-02"),
         description: "Groceries",
         category: "Food",
         merchant: "BigMart",
@@ -26,7 +26,7 @@ const transactions = [
     },
     {
         amount: 200.0,
-        date: new Date("2024-09-03"),
+        date: new Date("2025-09-03"),
         description: "Flight Ticket",
         category: "Travel",
         merchant: "IndiGo",

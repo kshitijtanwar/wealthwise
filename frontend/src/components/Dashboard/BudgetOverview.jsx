@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const BudgetOverview = ({ budgets, expenses }) => {
+    const navigate = useNavigate();
     const now = new Date();
     const months = [
         "Jan",
@@ -163,7 +166,10 @@ const BudgetOverview = ({ budgets, expenses }) => {
                         <p className="mb-0">
                             Create your first budget to start tracking
                         </p>
-                        <button className="btn btn-primary btn-sm mt-3 rounded-pill">
+                        <button
+                            onClick={() => navigate("/dashboard/budgets")}
+                            className="btn btn-primary btn-sm mt-3 rounded-pill"
+                        >
                             <i className="bi bi-plus me-1"></i>Create Budget
                         </button>
                     </div>

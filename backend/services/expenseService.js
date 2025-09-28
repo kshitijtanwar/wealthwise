@@ -1,25 +1,14 @@
 const Expense = require("../models/Expense");
-
-
- 
-
-const createExpenseFromTransaction = async(userId,txn,source="bank")=>{
-
+const BankAccount = require("../models/BankAccount");
+const createExpenseFromTransaction = async (userId, txn, source = "bank") => {
     const exists = await Expense.findOne({
-
         bankTransactionId: txn.bankTransactionId,
 
         userId,
-
     });
 
-
- 
-
-    if(!exists){
-
+    if (!exists) {
         await Expense.create({
-
             userId,
 
             amount: txn.amount,
@@ -36,80 +25,49 @@ const createExpenseFromTransaction = async(userId,txn,source="bank")=>{
 
             bankTransactionId: txn.bankTransactionId,
 
-            importedAt: new Date()
-
+            importedAt: new Date(),
         });
 
         return 1;
-
     }
 
     return 0;
-
 };
 
-
- 
-
-exports.importExpenses = async(userId,data)=>{
-
+exports.importExpenses = async (userId, data) => {
     let transactions = [];
 
-
- 
-
-    if(data.bankAccountId){
-
+    if (data.bankAccountId) {
         const bankAccount = await BankAccount.findOne({
-
-            accountNumber : data.bankAccountId,
+            accountNumber: data.bankAccountId,
 
             userId,
-
         });
 
-        if(!bankAccount){
-
+        if (!bankAccount) {
             throw new Error("Bank account not found");
-
         }
 
         transactions = bankAccount.transactions;
-
-    } else if(Array.isArray(data.transactions)){
-
+    } else if (Array.isArray(data.transactions)) {
         transactions = data.transactions;
-
     }
-
-
- 
 
     let importedCount = 0;
 
-    for(const txn of transactions){
-
+    for (const txn of transactions) {
         importedCount += await createExpenseFromTransaction(
-
             userId,
 
             txn,
 
             data.source
-
         );
-
     }
 
-    return {importedCount};
-
+    return { importedCount };
 };
 
-
- 
-
-exports.exportExpenses = async(userId)=>{
-
-    return []
-
-}
+exports.exportExpenses = async (userId) => {
+    return [];
+};

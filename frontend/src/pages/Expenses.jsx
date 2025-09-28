@@ -10,6 +10,9 @@ import { Container, Row, Col, Card, Alert, Spinner } from "react-bootstrap";
 
 import AddExpense from "../components/Expenses/AddExpense";
 
+import { FolderInput } from "lucide-react";
+import ImportExpenses from "../components/Expenses/ImportExpenses";
+
 const Expenses = () => {
     const [expenses, setExpenses] = useState([]);
 
@@ -18,6 +21,7 @@ const Expenses = () => {
     const [error, setError] = useState("");
 
     const [isOpen, setIsOpen] = useState(false);
+    const [isImportOpen, setIsImportOpen] = useState(false);
 
     useEffect(() => {
         fetchExpenses();
@@ -153,13 +157,21 @@ const Expenses = () => {
                         Track and analyze your spending patterns
                     </p>
                 </div>
-
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className="btn btn-primary btn-sm rounded-pill px-3 hover-lift"
-                >
-                    <AddRoundedIcon /> Add Expense
-                </button>
+                <div>
+                    <button
+                        className="btn btn-primary btn-sm rounded-pill px-3 hover-lift me-3"
+                        onClick={() => setIsImportOpen(true)}
+                    >
+                        <FolderInput size={18} className="me-1" /> Import
+                        Expenses
+                    </button>
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="btn btn-primary btn-sm rounded-pill px-3 hover-lift"
+                    >
+                        <AddRoundedIcon /> Add Expense
+                    </button>
+                </div>
             </div>
 
             {error && (
@@ -586,6 +598,11 @@ const Expenses = () => {
                 isOpen={isOpen}
                 onClose={() => setIsOpen(false)}
                 onExpenseAdded={handleAddExpense}
+            />
+            <ImportExpenses
+                open={isImportOpen}
+                onClose={() => setIsImportOpen(false)}
+                onImported={fetchExpenses}
             />
         </Container>
     );
