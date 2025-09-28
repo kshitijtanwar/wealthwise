@@ -1,31 +1,19 @@
-const Expense = require('../models/Expense');
+const Expense = require("../models/Expense");
 
-const Budget =  require('../models/Budget');
+const Budget = require("../models/Budget");
 
-const goal = require('../models/Goal');
+const goal = require("../models/Goal");
 
-const reportService = require('../services/reportService');
+const reportService = require("../services/reportService");
 
-
- 
-
-exports.getDashboard = async(req, res, next) =>{
-
+exports.getDashboard = async (req, res, next) => {
     try {
-
         //placeholder for dashboard stats
 
         const stats = await reportService.getDashboardStats(req.user._id);
 
-        res.json({stats});
-
-
- 
-
+        res.json({ stats });
     } catch (error) {
-
-        next(error)
-
+        next(error);
     }
-
-}
+};

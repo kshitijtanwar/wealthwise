@@ -16,8 +16,6 @@ import {
     ProgressBar,
 } from "react-bootstrap";
 
-import { LineChart } from "@mui/x-charts";
-
 import AddBudget from "../components/Budgets/AddBudget";
 
 const COLORS = [
@@ -58,13 +56,21 @@ const Budgets = () => {
         }
     };
 
+    // Only consider expenses from the current month
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+    const expensesThisMonth = expenses.filter((e) => {
+        if (!e?.date) return false;
+        const d = new Date(e.date);
+        return d >= startOfMonth && d < startOfNextMonth;
+    });
+
     /*
-
-   * Aggregate expense amounts by category for pie chart and budget consumption
-
-   */
-
-    const expenseTotalsByCategory = expenses.reduce((acc, e) => {
+     * Aggregate expense amounts by category for pie/progress using ONLY this month's expenses
+     */
+    const expenseTotalsByCategory = expensesThisMonth.reduce((acc, e) => {
         if (e.category && e.amount) {
             acc[e.category] = (acc[e.category] || 0) + e.amount;
         }
@@ -72,16 +78,11 @@ const Budgets = () => {
     }, {});
 
     /*
-
-   * Build data for line chart:
-
-   * Track budget remaining over months for each category (assuming expenses have 'date')
-
-   */
-
+     * Build data for line chart using ONLY this month's expenses
+     */
     const monthlyExpensesByCategory = {};
 
-    expenses.forEach(({ category, date, amount }) => {
+    expensesThisMonth.forEach(({ category, date, amount }) => {
         if (category && date && amount) {
             const month = new Date(date).toLocaleDateString("en-US", {
                 month: "short",
@@ -98,31 +99,6 @@ const Budgets = () => {
     Object.values(monthlyExpensesByCategory).forEach((m) =>
         Object.keys(m).forEach((month) => allMonthsSet.add(month))
     );
-    const allMonths = Array.from(allMonthsSet).sort(
-        (a, b) => new Date(a) - new Date(b)
-    );
-
-    const lineSeries = budgets.map((b, idx) => {
-        const monthlySpend = monthlyExpensesByCategory[b.category] || {};
-        let cumulativeSpend = 0;
-        const data = allMonths.map((month) => {
-            const spent = monthlySpend[month] || 0;
-            cumulativeSpend += spent;
-            return Math.max(b.amount - cumulativeSpend, 0);
-        });
-        return {
-            label: `${b.category}`,
-            data,
-            color: COLORS[idx % COLORS.length],
-            curve: "linear",
-        };
-    });
-
-    /*
-
-   * For progress bars, show spend % per budget
-
-   */
 
     const enhancedBudgets = budgets.map((b, idx) => {
         const spent = expenseTotalsByCategory[b.category] || 0;
@@ -221,7 +197,7 @@ const Budgets = () => {
                                             <div className="text-end">
                                                 <div className="fw-semibold">
                                                     ₹{budget.spent.toFixed(2)} /
-                                                    ${budget.amount.toFixed(2)}
+                                                    ₹{budget.amount.toFixed(2)}
                                                 </div>
                                             </div>
                                         </div>
@@ -231,7 +207,7 @@ const Budgets = () => {
                                                 1
                                             )}%`}
                                             className="rounded-3"
-                                            style={{ height: "8px" }}
+                                            style={{ height: "20px" }}
                                             variant="info"
                                             animated
                                         />
@@ -244,61 +220,6 @@ const Budgets = () => {
                                         style={{ fontSize: "2rem" }}
                                     >
                                         📊
-                                    </div>
-                                    <p className="text-muted mb-0">
-                                        No budget data available.
-                                    </p>
-                                </div>
-                            )}
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-
-            {/* Budget Remaining Over Time */}
-            <Row>
-                <Col>
-                    <Card className="border-0 shadow-sm h-100">
-                        <Card.Header className="bg-transparent border-0 py-3">
-                            <div className="d-flex align-items-center">
-                                <div
-                                    className="rounded-circle bg-success bg-opacity-10 d-inline-flex align-items-center justify-content-center me-3"
-                                    style={{ width: "40px", height: "40px" }}
-                                >
-                                    <span style={{ fontSize: "1.2rem" }}>
-                                        📈
-                                    </span>
-                                </div>
-                                <div>
-                                    <h5 className="mb-0 fw-semibold">
-                                        Budget Remaining Over Time
-                                    </h5>
-                                    <small className="text-muted">
-                                        Track how your remaining budget changes
-                                        by month
-                                    </small>
-                                </div>
-                            </div>
-                        </Card.Header>
-                        <Card.Body className="pt-2">
-                            {lineSeries.length ? (
-                                <LineChart
-                                    height={400}
-                                    xAxis={[
-                                        {
-                                            scaleType: "point",
-                                            data: allMonths,
-                                        },
-                                    ]}
-                                    series={lineSeries}
-                                />
-                            ) : (
-                                <div className="text-center py-4">
-                                    <div
-                                        className="text-muted mb-2"
-                                        style={{ fontSize: "2rem" }}
-                                    >
-                                        📈
                                     </div>
                                     <p className="text-muted mb-0">
                                         No budget data available.
