@@ -169,17 +169,17 @@ const Budgets = () => {
 
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h1 className="display-5 fw-bold text-dark mb-1">
+                    <h1 className="display-5 fw-bold mb-2 text-primary">
                         Budgets
                     </h1>
+                    <h1 className="display-5 fw-bold text-dark mb-1 text-primary"></h1>
                     <p className="text-muted mb-0">Track usage and trends</p>
                 </div>
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="btn btn-primary px-4 py-2 rounded-3 shadow-sm hover-lift"
-                    style={{ height: "fit-content" }}
+                    className="btn btn-primary btn-sm rounded-pill px-3 hover-lift"
                 >
-                    <AddRoundedIcon className="me-2" /> Add Budget
+                    <AddRoundedIcon /> Add Budget
                 </button>
             </div>
 

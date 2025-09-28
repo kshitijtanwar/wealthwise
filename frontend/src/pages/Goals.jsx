@@ -525,12 +525,17 @@ const Goal = () => {
                             </Button>
                         </Paper>
                     ) : (
-                        <Grid container spacing={3}>
+                        <div className="row g-4">
                             {goals.map((goal) => {
                                 const projection =
                                     calculateGoalProjection(goal);
                                 return (
-                                    <Grid item xs={12} lg={6} key={goal._id}>
+                                    <div
+                                        className="col-12 col-md-4"
+                                        xs={12}
+                                        lg={6}
+                                        key={goal._id}
+                                    >
                                         <Card
                                             sx={{
                                                 borderRadius: 3,
@@ -925,10 +930,10 @@ const Goal = () => {
                                                 )}
                                             </CardContent>
                                         </Card>
-                                    </Grid>
+                                    </div>
                                 );
                             })}
-                        </Grid>
+                        </div>
                     )}
                 </>
             )}

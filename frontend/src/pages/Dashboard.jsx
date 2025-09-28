@@ -10,7 +10,7 @@ import ExpenseChart from "../components/Dashboard/ExpenseChart";
 import BudgetOverview from "../components/Dashboard/BudgetOverview";
 
 import RecentTransactions from "../components/Dashboard/RecentTransactions";
-
+import { Download } from "lucide-react";
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState(null);
     const [expenses, setExpenses] = useState([]);
@@ -94,7 +94,7 @@ const Dashboard = () => {
             const summaryData = [
                 [
                     "Total Expenses",
-                    `$${dashboardData?.stats?.totalExpenses || "0"}`,
+                    `${dashboardData?.stats?.totalExpenses || "0"}`,
                 ],
                 [
                     "Active Budgets",
@@ -176,7 +176,7 @@ const Dashboard = () => {
 
                 pdf.setTextColor(33, 37, 41);
                 pdf.text(category, margin + 2, yPosition + 2);
-                pdf.text(`₹${amount.toFixed(2)}`, margin + 80, yPosition + 2);
+                pdf.text(`Rs.${amount.toFixed(2)}`, margin + 80, yPosition + 2);
                 pdf.text(`${percentage}%`, margin + 120, yPosition + 2);
                 yPosition += 6;
             });
@@ -252,7 +252,7 @@ const Dashboard = () => {
 
                     pdf.setTextColor(220, 53, 69); // Red for expenses
                     pdf.text(
-                        `-₹${expense.amount.toFixed(2)}`,
+                        `-Rs.${expense.amount.toFixed(2)}`,
                         margin + 120,
                         yPosition + 2
                     );
@@ -323,7 +323,6 @@ const Dashboard = () => {
                     <div className="d-flex align-items-center justify-content-between flex-wrap">
                         <div>
                             <h1 className="display-5 fw-bold mb-2 text-primary">
-                                <i className="bi bi-speedometer2"></i>
                                 Dashboard
                             </h1>
                             <p className="lead text-muted mb-0">
@@ -332,7 +331,7 @@ const Dashboard = () => {
                         </div>
                         <div className="d-flex gap-2">
                             <button
-                                className="btn btn-outline-primary btn-sm rounded-pill px-3"
+                                className="btn btn-primary btn-sm rounded-pill px-3 hover-lift"
                                 onClick={exportToPDF}
                                 disabled={exporting || loading}
                             >
@@ -347,7 +346,7 @@ const Dashboard = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <i className="bi bi-download me-1"></i>
+                                        <Download size={16} className="me-1" />
                                         Export PDF
                                     </>
                                 )}

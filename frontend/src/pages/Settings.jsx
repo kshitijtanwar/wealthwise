@@ -10,8 +10,6 @@ import {
     Button,
     Paper,
     Box,
-    Card,
-    CardContent,
     Alert,
     AlertTitle,
     LinearProgress,
@@ -160,9 +158,9 @@ const Settings = () => {
                 </Box>
             </Paper>
 
-            <Grid container spacing={4}>
+            <div className="row g-4">
                 {/* Left Column - Form */}
-                <Grid item xs={12} lg={7}>
+                <div className="col-12 col-lg-8">
                     <Paper sx={{ p: 4, borderRadius: 3, boxShadow: 4 }}>
                         <Typography
                             variant="h5"
@@ -454,252 +452,214 @@ const Settings = () => {
                             </Box>
                         </form>
                     </Paper>
-                </Grid>
+                </div>
 
                 {/* Right Column - Preview & Validation */}
-                <Grid item xs={12} lg={5}>
-                    <Grid container spacing={3}>
-                        {/* Budget Summary - Left Card */}
-                        <Grid item xs={12} md={6}>
-                            <Paper
+                <div className="col-12 col-lg-4">
+                    <Paper
+                        sx={{
+                            p: 3,
+                            borderRadius: 3,
+                            boxShadow: 4,
+                            height: "fit-content",
+                        }}
+                    >
+                        <Typography variant="h6" gutterBottom fontWeight="bold">
+                            📊 Budget Summary
+                        </Typography>
+
+                        <Box sx={{ mb: 3 }}>
+                            <Box
                                 sx={{
-                                    p: 3,
-                                    borderRadius: 3,
-                                    boxShadow: 4,
-                                    height: "fit-content",
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    mb: 1,
                                 }}
                             >
                                 <Typography
-                                    variant="h6"
-                                    gutterBottom
-                                    fontWeight="bold"
+                                    variant="body2"
+                                    color="text.secondary"
                                 >
-                                    📊 Budget Summary
+                                    Monthly Salary
                                 </Typography>
-
-                                <Box sx={{ mb: 3 }}>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            mb: 1,
-                                        }}
-                                    >
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            Monthly Salary
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            fontWeight="bold"
-                                        >
-                                            ₹{currentSalary.toLocaleString()}
-                                        </Typography>
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            mb: 1,
-                                        }}
-                                    >
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                        >
-                                            Total Allocated
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            fontWeight="bold"
-                                            color={
-                                                totalAllocated > currentSalary
-                                                    ? "error"
-                                                    : "text.primary"
-                                            }
-                                        >
-                                            ₹{totalAllocated.toLocaleString()}
-                                        </Typography>
-                                    </Box>
-                                    <Divider sx={{ my: 1 }} />
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                        }}
-                                    >
-                                        <Typography
-                                            variant="body2"
-                                            fontWeight="bold"
-                                        >
-                                            Remaining
-                                        </Typography>
-                                        <Typography
-                                            variant="body2"
-                                            fontWeight="bold"
-                                            color={
-                                                remaining < 0
-                                                    ? "error"
-                                                    : remaining === 0
-                                                    ? "success.main"
-                                                    : "warning.main"
-                                            }
-                                        >
-                                            ₹{remaining.toLocaleString()}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-
-                                {/* Progress Bar */}
-                                {currentSalary > 0 && (
-                                    <Box sx={{ mb: 3 }}>
-                                        <Typography
-                                            variant="body2"
-                                            gutterBottom
-                                        >
-                                            Budget Allocation Progress
-                                        </Typography>
-                                        <LinearProgress
-                                            variant="determinate"
-                                            value={Math.min(
-                                                (totalAllocated /
-                                                    currentSalary) *
-                                                    100,
-                                                100
-                                            )}
-                                            sx={{
-                                                height: 12,
-                                                borderRadius: 6,
-                                                backgroundColor: "#e0e0e0",
-                                                "& .MuiLinearProgress-bar": {
-                                                    background:
-                                                        totalAllocated >
-                                                        currentSalary
-                                                            ? "linear-gradient(45deg, #f44336 30%, #ff5722 90%)"
-                                                            : totalAllocated ===
-                                                              currentSalary
-                                                            ? "linear-gradient(45deg, #4caf50 30%, #8bc34a 90%)"
-                                                            : "linear-gradient(45deg, #ff9800 30%, #ffc107 90%)",
-                                                },
-                                            }}
-                                        />
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                            sx={{ mt: 1 }}
-                                        >
-                                            {(
-                                                (totalAllocated /
-                                                    currentSalary) *
-                                                100
-                                            ).toFixed(1)}
-                                            % of salary allocated
-                                        </Typography>
-                                    </Box>
-                                )}
-
-                                {/* Validation Messages */}
-                                {currentSalary > 0 && (
-                                    <>
-                                        {remaining === 0 && (
-                                            <Alert
-                                                severity="success"
-                                                sx={{ mb: 2 }}
-                                            >
-                                                <AlertTitle>
-                                                    Perfect Balance! ✅
-                                                </AlertTitle>
-                                                Your budget allocation matches
-                                                your salary exactly.
-                                            </Alert>
-                                        )}
-
-                                        {remaining > 0 && (
-                                            <Alert
-                                                severity="warning"
-                                                sx={{ mb: 2 }}
-                                            >
-                                                <AlertTitle>
-                                                    Unallocated Amount
-                                                </AlertTitle>
-                                                You have ₹
-                                                {remaining.toLocaleString()}{" "}
-                                                left to allocate.
-                                            </Alert>
-                                        )}
-
-                                        {remaining < 0 && (
-                                            <Alert
-                                                severity="error"
-                                                sx={{ mb: 2 }}
-                                            >
-                                                <AlertTitle>
-                                                    Over Budget! ⚠️
-                                                </AlertTitle>
-                                                You're allocating ₹
-                                                {Math.abs(
-                                                    remaining
-                                                ).toLocaleString()}{" "}
-                                                more than your salary.
-                                            </Alert>
-                                        )}
-                                    </>
-                                )}
-                            </Paper>
-                        </Grid>
-
-                        {/* Budget Tips - Right Card */}
-                        <Grid item xs={12} md={6}>
-                            <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 4 }}>
+                                <Typography variant="body2" fontWeight="bold">
+                                    ₹{currentSalary.toLocaleString()}
+                                </Typography>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    mb: 1,
+                                }}
+                            >
                                 <Typography
-                                    variant="h6"
-                                    gutterBottom
-                                    fontWeight="bold"
-                                    sx={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                    }}
+                                    variant="body2"
+                                    color="text.secondary"
                                 >
-                                    <Info sx={{ mr: 1 }} />
-                                    Smart Budget Tips
+                                    Total Allocated
                                 </Typography>
-                                <Box component="ul" sx={{ pl: 2, m: 0 }}>
-                                    <Typography
-                                        component="li"
-                                        variant="body2"
-                                        sx={{ mb: 1 }}
-                                    >
-                                        <strong>60-30-10 Rule:</strong> 60%
-                                        expenses, 30% savings, 10% miscellaneous
-                                    </Typography>
-                                    <Typography
-                                        component="li"
-                                        variant="body2"
-                                        sx={{ mb: 1 }}
-                                    >
-                                        <strong>Emergency Fund:</strong> Aim to
-                                        save 3-6 months of expenses
-                                    </Typography>
-                                    <Typography
-                                        component="li"
-                                        variant="body2"
-                                        sx={{ mb: 1 }}
-                                    >
-                                        <strong>Investment Goal:</strong> Try to
-                                        save at least 20-30% of income
-                                    </Typography>
-                                    <Typography component="li" variant="body2">
-                                        <strong>Track & Adjust:</strong> Review
-                                        and adjust your budget monthly
-                                    </Typography>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
+                                <Typography
+                                    variant="body2"
+                                    fontWeight="bold"
+                                    color={
+                                        totalAllocated > currentSalary
+                                            ? "error"
+                                            : "text.primary"
+                                    }
+                                >
+                                    ₹{totalAllocated.toLocaleString()}
+                                </Typography>
+                            </Box>
+                            <Divider sx={{ my: 1 }} />
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                }}
+                            >
+                                <Typography variant="body2" fontWeight="bold">
+                                    Remaining
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    fontWeight="bold"
+                                    color={
+                                        remaining < 0
+                                            ? "error"
+                                            : remaining === 0
+                                            ? "success.main"
+                                            : "warning.main"
+                                    }
+                                >
+                                    ₹{remaining.toLocaleString()}
+                                </Typography>
+                            </Box>
+                        </Box>
+
+                        {/* Progress Bar */}
+                        {currentSalary > 0 && (
+                            <Box sx={{ mb: 3 }}>
+                                <Typography variant="body2" gutterBottom>
+                                    Budget Allocation Progress
+                                </Typography>
+                                <LinearProgress
+                                    variant="determinate"
+                                    value={Math.min(
+                                        (totalAllocated / currentSalary) * 100,
+                                        100
+                                    )}
+                                    sx={{
+                                        height: 12,
+                                        borderRadius: 6,
+                                        backgroundColor: "#e0e0e0",
+                                        "& .MuiLinearProgress-bar": {
+                                            background:
+                                                totalAllocated > currentSalary
+                                                    ? "linear-gradient(45deg, #f44336 30%, #ff5722 90%)"
+                                                    : totalAllocated ===
+                                                      currentSalary
+                                                    ? "linear-gradient(45deg, #4caf50 30%, #8bc34a 90%)"
+                                                    : "linear-gradient(45deg, #ff9800 30%, #ffc107 90%)",
+                                        },
+                                    }}
+                                />
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    sx={{ mt: 1 }}
+                                >
+                                    {(
+                                        (totalAllocated / currentSalary) *
+                                        100
+                                    ).toFixed(1)}
+                                    % of salary allocated
+                                </Typography>
+                            </Box>
+                        )}
+
+                        {/* Validation Messages */}
+                        {currentSalary > 0 && (
+                            <>
+                                {remaining === 0 && (
+                                    <Alert severity="success" sx={{ mb: 2 }}>
+                                        <AlertTitle>
+                                            Perfect Balance! ✅
+                                        </AlertTitle>
+                                        Your budget allocation matches your
+                                        salary exactly.
+                                    </Alert>
+                                )}
+
+                                {remaining > 0 && (
+                                    <Alert severity="warning" sx={{ mb: 2 }}>
+                                        <AlertTitle>
+                                            Unallocated Amount
+                                        </AlertTitle>
+                                        You have ₹{remaining.toLocaleString()}{" "}
+                                        left to allocate.
+                                    </Alert>
+                                )}
+
+                                {remaining < 0 && (
+                                    <Alert severity="error" sx={{ mb: 2 }}>
+                                        <AlertTitle>Over Budget! ⚠️</AlertTitle>
+                                        You're allocating ₹
+                                        {Math.abs(
+                                            remaining
+                                        ).toLocaleString()}{" "}
+                                        more than your salary.
+                                    </Alert>
+                                )}
+                            </>
+                        )}
+                    </Paper>
+                </div>
+            </div>
+
+            {/* Bottom Info Section - Smart Budget Tips */}
+            <Box sx={{ mt: 4 }}>
+                <Paper sx={{ p: 3, borderRadius: 3, boxShadow: 4 }}>
+                    <Typography
+                        variant="h6"
+                        gutterBottom
+                        fontWeight="bold"
+                        sx={{ display: "flex", alignItems: "center" }}
+                    >
+                        <Info sx={{ mr: 1 }} /> Smart Budget Tips
+                    </Typography>
+                    <Box component="ul" sx={{ pl: 2, m: 0 }}>
+                        <Typography
+                            component="li"
+                            variant="body2"
+                            sx={{ mb: 1 }}
+                        >
+                            <strong>60-30-10 Rule:</strong> 60% expenses, 30%
+                            savings, 10% miscellaneous
+                        </Typography>
+                        <Typography
+                            component="li"
+                            variant="body2"
+                            sx={{ mb: 1 }}
+                        >
+                            <strong>Emergency Fund:</strong> Aim to save 3-6
+                            months of expenses
+                        </Typography>
+                        <Typography
+                            component="li"
+                            variant="body2"
+                            sx={{ mb: 1 }}
+                        >
+                            <strong>Investment Goal:</strong> Try to save at
+                            least 20-30% of income
+                        </Typography>
+                        <Typography component="li" variant="body2">
+                            <strong>Track & Adjust:</strong> Review and adjust
+                            your budget monthly
+                        </Typography>
+                    </Box>
+                </Paper>
+            </Box>
         </Container>
     );
 };

@@ -250,6 +250,7 @@ export default function Layout() {
                         noWrap
                         component="div"
                         onClick={() => navigate("/")}
+                        className="cursor-pointer font-weight-bold"
                     >
                         Wealthwise
                     </Typography>
@@ -381,6 +382,7 @@ export default function Layout() {
                                     key={text}
                                     disablePadding
                                     sx={{ display: "block" }}
+                                    className="text-danger"
                                 >
                                     <ListItemButton
                                         sx={{
@@ -402,6 +404,7 @@ export default function Layout() {
 
                                                 mr: open ? 3 : "auto",
                                             }}
+                                            className="text-danger"
                                         >
                                             <ExitToAppOutlinedIcon />
                                         </ListItemIcon>

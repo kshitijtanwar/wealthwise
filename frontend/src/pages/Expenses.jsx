@@ -156,10 +156,9 @@ const Expenses = () => {
 
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="btn btn-primary px-4 py-2 rounded-3 shadow-sm hover-lift"
-                    style={{ height: "fit-content" }}
+                    className="btn btn-primary btn-sm rounded-pill px-3 hover-lift"
                 >
-                    <AddRoundedIcon className="me-2" /> Add Expense
+                    <AddRoundedIcon /> Add Expense
                 </button>
             </div>
 
