@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import {
     Container,
@@ -126,8 +126,6 @@ const Settings = () => {
 
     return (
         <Container maxWidth={false} sx={{ mt: 4, px: 4 }}>
-            <Toaster position="top-right" reverseOrder={false} />
-
             {/* Header */}
             <Paper
                 sx={{

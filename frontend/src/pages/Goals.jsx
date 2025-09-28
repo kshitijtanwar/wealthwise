@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import {
     Container,
@@ -29,16 +29,16 @@ import {
     Delete,
     AccountBalanceWallet,
     TrendingUp,
-    Info,
     Settings,
 } from "@mui/icons-material";
 
 import { goalAPI } from "../../services/api";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Goal = () => {
     const { user } = useAuth();
-
+    const navigate = useNavigate();
     // State management
     const [activeTab, setActiveTab] = useState("view"); // 'view' or 'create'
     const [goalName, setGoalName] = useState("");
@@ -240,8 +240,6 @@ const Goal = () => {
     if (!hasSalary) {
         return (
             <Container maxWidth="md" sx={{ mt: 4 }}>
-                <Toaster position="top-right" reverseOrder={false} />
-
                 <Paper
                     sx={{
                         p: 4,
@@ -315,6 +313,7 @@ const Goal = () => {
                                 borderRadius: 2,
                                 px: 4,
                             }}
+                            onClick={() => navigate("/dashboard/settings")}
                         >
                             Go to Settings
                         </Button>
@@ -326,8 +325,6 @@ const Goal = () => {
 
     return (
         <Container maxWidth="xl" sx={{ mt: 4 }}>
-            <Toaster position="top-right" reverseOrder={false} />
-
             {/* Header */}
             <Paper
                 sx={{
